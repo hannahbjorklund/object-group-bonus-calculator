@@ -32,9 +32,6 @@ const employees = [
   }
 ];
 
-console.log('array of employee data: ',  employees );
-
-
 // YOU SHOULD NOT NEED TO CHANGE ANYTHING ABOVE THIS POINT
 
 // This problem is massive! Break the problem down, take small steps, and test as you go.
@@ -43,15 +40,49 @@ console.log('array of employee data: ',  employees );
 // This is not a race. Everyone on your team should understand what is happening.
 // Ask questions when you don't.
 
-
-
-
 // This function will calculate 1 employee's bonus!
 //
 function calculateIndividualEmployeeBonus( employee ) {  
   // your logic here
-  
-  
-  // return new object with bonus results
+  let bonus
+  if (employee.reviewRating <= 2){
+    bonus = 0;
+  }
+  if (employee.reviewRating == 3){
+    bonus = 0.04;
+  }
+  if (employee.reviewRating == 4){
+    bonus = 0.06;
+  }
+  if (employee.reviewRating == 5){
+    bonus = 0.1;
+  }
+  if (employee.employeeNumber.length == 4){
+    bonus += 0.05;
+  }
+  if (employee.annualSalary > 65000){
+    bonus -= 0.01;
+  }
+  if (bonus <0){
+    bonus = 0;
+  }
+  if (bonus > 0.13){
+    bonus = 0.13;
+  }
 
+  return bonus; 
+}
+
+function bonusCalculation (employee) {
+  let bonusPercentage = calculateIndividualEmployeeBonus(employee);
+  let totalBonus =  bonusPercentage * employee.annualSalary;
+  let totalCompensation = Number(employee.annualSalary) + totalBonus;
+  return {name: employee.name,
+  bonusPercentage: bonusPercentage,
+  totalCompensation: totalCompensation,
+  totalBonus: totalBonus};
+}
+
+for(let employee of employees){
+  console.log(bonusCalculation(employee));
 }
